@@ -2,6 +2,7 @@ package tests;
 
 import junit.framework.TestCase;
 import estructuras.ListaOrdenada;
+import java.util.Random;
 
 public class ListaOrdenadaTest extends TestCase {
 
@@ -18,12 +19,20 @@ public class ListaOrdenadaTest extends TestCase {
 	 * método sort() y verifica que los elementos estén ordenados.
 	 */
 	public void testSort(){
-		int[] desordenados = { 5, 3, 7, 1, 0, 8, 4, 2, 9, 6 };
-		for( int i : desordenados ) lista.add( i );
+		for( int i = 0; i < 100; i++ )
+			lista.addNonSort( (int)(Math.random() * 150) );
+		//System.out.println( lista.toString() );
 		lista.sort();
-		for( int i = 0; i < lista.size(); i++ ){
-			assertEquals( (Integer)i, (Integer)lista.get(i) );
-		}
+		for( int i = 1; i < 15; i++ )
+			if( lista.get(i) < lista.get(i-1) ) fail();
+		//System.out.println( lista.toString() );
+		try {
+			setUp();
+		} catch (Exception e) {}
+		for( int i = 0; i < 100; i++ )
+			lista.add( (int)(Math.random() * 150) );
+		for( int i = 1; i < 15; i++ )
+			if( lista.get(i) < lista.get(i-1) ) fail();
 	}
 
 	@Override
