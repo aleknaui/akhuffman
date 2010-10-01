@@ -13,7 +13,7 @@ public class TestNodo extends TestCase {
 		super(name);
 	}
 
-	/** Prepara la clase para realizar pruebas. Instancia el nodo y como objeto le asigna "casa". */
+	@Override
 	protected void setUp() throws Exception {
 		nodo = new Nodo<String>("casa");
 	}
@@ -23,7 +23,7 @@ public class TestNodo extends TestCase {
 		assertEquals("casa",nodo.darValor());
 	}
 	
-	/**  */
+	/** Prueba de inserción de objetos. Verifica que diferentes valores se almacenen del lado adecuado. */
 	public final void testSetHijo(){
 		nodo.setHijo("carro");
 		assertEquals("carro",nodo.darHijoIzquierdo().darValor());
@@ -32,6 +32,7 @@ public class TestNodo extends TestCase {
 		assertEquals(false, nodo.setHijo("carro"));
 	}
 	
+	@Override
 	protected void tearDown() throws Exception {
 		nodo = null;
 	}
