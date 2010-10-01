@@ -46,9 +46,8 @@ public class ArbolBinario<E extends Comparable<E>> {
 	 */
 	public int size(){
 		if( isEmpty() ) return 0;
-		else{
+		else
 			return primero.cantidadHijos();
-		}
 	}
 	
 	/**
@@ -62,6 +61,7 @@ public class ArbolBinario<E extends Comparable<E>> {
 	}
 
 	public E buscar( E objeto ){
+		if( isEmpty() ) return null;
 		return primero.buscar( objeto );
 	}
 }

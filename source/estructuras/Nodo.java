@@ -96,7 +96,7 @@ public class Nodo<E extends Comparable<E>> {
 	 * @return true Si el hijo derecho no es null. false Si lo es.
 	 */
 	public boolean tieneHijoDer(){
-		return hijoDer == null;
+		return hijoDer != null;
 	}
 	
 	/**
@@ -104,7 +104,7 @@ public class Nodo<E extends Comparable<E>> {
 	 * @return true Si el hijo derecho no es null. false Si lo es.
 	 */
 	public boolean tieneHijoIzq(){
-		return hijoIzq == null;
+		return hijoIzq != null;
 	}
 	
 	/**
@@ -120,7 +120,7 @@ public class Nodo<E extends Comparable<E>> {
 	 * @return La cantidad de hijos que tiene un nodo.
 	 */
 	public int cantidadHijos(){
-		if( !tieneHijos() ) return 0;
+		if( !tieneHijos() ) return 1;
 		int izq = tieneHijoIzq() ? hijoIzq.cantidadHijos() : 0;
 		int der = tieneHijoDer() ? hijoDer.cantidadHijos() : 0;
 		return 1 + izq + der;
@@ -144,7 +144,7 @@ public class Nodo<E extends Comparable<E>> {
 	 */
 	public E buscar( E objeto ){
 		if( valor.compareTo( objeto ) == 0 ) return valor;
-		else if( valor.compareTo( objeto ) > 0 ){
+		else if( valor.compareTo( objeto ) < 0 ){
 			if ( ! tieneHijoDer() ) return null;
 			else
 				return hijoDer.buscar( objeto );
