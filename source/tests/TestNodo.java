@@ -29,7 +29,8 @@ public class TestNodo extends TestCase {
 		assertEquals("carro",nodo.darHijoIzquierdo().darValor());
 		nodo.setHijo( "cosa" );
 		assertEquals("cosa",nodo.darHijoDerecho().darValor());
-		assertEquals(false, nodo.setHijo("carro"));
+		nodo.setHijo("carro");
+		assertEquals("carro",nodo.darHijoIzquierdo().darHijoIzquierdo().darValor());
 	}
 	
 	@Override

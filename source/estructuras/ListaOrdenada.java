@@ -15,27 +15,36 @@ public class ListaOrdenada<E extends Comparable<E>> extends ArrayList<E>{
 	
 	/**
 	 * Método que ordena los elementos de la lista utilizando el algoritmo
-	 * de Bubble Sort.
-	 * Tomado de: http://answers.yahoo.com/question/index?qid=20080404114642AAmF68Y
+	 * de inserción obtenido en http://es.wikipedia.org/wiki/Ordenamiento_por_inserci%C3%B3n.
 	 */
 	public void sort(){
-		int out, in;
-
-		for( out = size()-1; out > 1; out-- ) // outer loop (backward)
-		for( in = 0; in < out; in++ ) // inner loop (forward)
-		if( get(in).compareTo(get( in+1 )) == 1 ) // out of order?
-			swap(in, in+1); // swap them
+		for( int i = 1; i < size(); i++ ){
+			E auxiliar = get(i);
+			int j;
+			for( j = i-1; j >= 0 && auxiliar.compareTo( get(j) ) < 0; j-- )
+				set( j+1, get(j) );
+			set(j+1, auxiliar);
+		}
 	}
-
+	
 	/**
-	 * Método que cambia de lugar dos elementos dados sus índices
-	 * @param i1 El índice del primer elemento
-	 * @param i2 El índice del segundo elemento
+	 * Realiza la operación add sin ordenar la lista.
+	 * @param e El objeto a agregar.
+	 * @return true Si se realizó la operación. false Si no se realizó.
 	 */
-	private void swap(int i1, int i2) {
-		E primero = get(i1);
-		E segundo = get(i2);
-		set( i1, segundo );
-		set( i2, primero );
+	public boolean addNonSort( E e ){
+		return super.add( e );
+	}
+	
+	/**
+	 * Agrega un elemento a la lista y la ordena.
+	 * @param e El objeto a agretar.
+	 * @return true Si se realizó la operación. false Si no se realizó.
+	 * post: El elemento se agregó a la lista y la lista se ha ordenado.
+	 */
+	public boolean add( E e ){
+		boolean ret = super.add( e );
+		sort();
+		return ret;
 	}
 }

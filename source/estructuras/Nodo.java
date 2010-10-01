@@ -2,10 +2,10 @@ package estructuras;
 
 /**
  * Clase que representa un nodo en un arbol binario.
- * @author aleKnaui
+ * @author aleKnaui, bakedInTime
  * @param <E> Genérico de la clase
  */
-public class Nodo<E extends Comparable<E>> {
+public class Nodo<E extends Comparable<E>> implements Comparable<Nodo<E>>{
 
 	// --------------------------------------------------------------------------------
 	// Atributos
@@ -66,29 +66,79 @@ public class Nodo<E extends Comparable<E>> {
 	 * @param hijo El objeto que se quiere contener en el nodo.
 	 * @return true Si se realizó la inserción. false Si no se realizó la inserción.
 	 * post: Si "hijo" es de valor mayor a "valor", se coloca como nodo derecho. Si es de valor menor, se coloca como nodo izquierdo.
-	 * Si es de valor igual, no se realiza la inserción. Este método es recursivo, por lo que si ambos nodos están ya ocupados, la
-	 * responsabilidad de insertar el nodo se delega a uno de los nodos hijos, dependiendo del valor de "hijo". 
+	 * Si es de valor igual se prueba colocar directamente a la izquierda. Si ya hay un nodo en la izquierda, se prueba en la derecha.
+	 * Si ambos están llenos, se inserta en la rama con menor cantidad de nodos. Si ambas ramas tienen igual cantidad de nodos, se
+	 * inserta en la rama izquierda. Este método es recursivo, por lo que si ambos nodos están ya ocupados, la responsabilidad de
+	 * insertar el nodo se delega a uno de los nodos hijos, dependiendo del valor de "hijo". 
 	 */
-	public boolean setHijo(E hijo){
+	public void setHijo(E hijo){
 		if(valor.compareTo(hijo) < 0){
 			if( tieneHijoDer() )
-				return hijoDer.setHijo(hijo);
+				hijoDer.setHijo(hijo);
 			else{
 				hijoDer = new Nodo<E>(hijo);
-				return true;
 			}
 		}
 		else if(valor.compareTo(hijo) > 0)
 		{
 			if( tieneHijoIzq() )
-				return hijoIzq.setHijo(hijo);
+				hijoIzq.setHijo(hijo);
 			else{
 				hijoIzq = new Nodo<E>(hijo);
-				return true;
 			}
 		}
-		else
-			return false;
+		else{
+			if( ! tieneHijoIzq() )
+				hijoIzq = new Nodo<E>(hijo);
+			else if( ! tieneHijoDer() )
+				hijoDer = new Nodo<E>(hijo);
+			else{
+				if( hijoIzq.cantidadHijos() > hijoDer.cantidadHijos() )
+					hijoDer.setHijo(hijo);
+				else
+					hijoIzq.setHijo(hijo);
+			}
+		}
+	}
+	
+	/**
+	 * Inserta un hijo en el nodo.
+	 * @param hijo El objeto que se quiere contener en el nodo.
+	 * @return true Si se realizó la inserción. false Si no se realizó la inserción.
+	 * post: Si "hijo" es de valor mayor a "valor", se coloca como nodo derecho. Si es de valor menor, se coloca como nodo izquierdo.
+	 * Si es de valor igual se prueba colocar directamente a la izquierda. Si ya hay un nodo en la izquierda, se prueba en la derecha.
+	 * Si ambos están llenos, se inserta en la rama con menor cantidad de nodos. Si ambas ramas tienen igual cantidad de nodos, se
+	 * inserta en la rama izquierda. Este método es recursivo, por lo que si ambos nodos están ya ocupados, la responsabilidad de
+	 * insertar el nodo se delega a uno de los nodos hijos, dependiendo del valor de "hijo". 
+	 */
+	public void setHijo(Nodo<E> hijo){
+		if(compareTo(hijo) < 0){
+			if( tieneHijoDer() )
+				hijoDer.setHijo(hijo);
+			else{
+				hijoDer = hijo;
+			}
+		}
+		else if(compareTo(hijo) > 0)
+		{
+			if( tieneHijoIzq() )
+				hijoIzq.setHijo(hijo);
+			else{
+				hijoIzq = hijo;
+			}
+		}
+		else{
+			if( ! tieneHijoIzq() )
+				hijoIzq = hijo;
+			else if( ! tieneHijoDer() )
+				hijoDer = hijo;
+			else{
+				if( hijoIzq.cantidadHijos() > hijoDer.cantidadHijos() )
+					hijoDer.setHijo(hijo);
+				else
+					hijoIzq.setHijo(hijo);
+			}
+		}
 	}
 	
 	/**
@@ -154,6 +204,11 @@ public class Nodo<E extends Comparable<E>> {
 			else
 				return hijoIzq.buscar( objeto );
 		}
+	}
+
+	@Override
+	public int compareTo(Nodo<E> o) {
+		return valor.compareTo(o.valor);
 	}
 
 }
