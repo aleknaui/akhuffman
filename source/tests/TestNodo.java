@@ -35,6 +35,9 @@ public class TestNodo extends TestCase {
 		assertEquals("carro",nodo.darHijoIzquierdo().darHijoIzquierdo().darValor());
 	}
 	
+	/**
+	 * Prueba de generación de caminos. Agrega varios elementos y comprueba que los caminos hayan sido correctamente representados.
+	 */
 	public final void testTracePathTo(){
 		nodo = new Nodo<String>("f");
 		String[] elementos = {"d","h","e","g","l","b","c","z"};

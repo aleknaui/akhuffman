@@ -211,6 +211,12 @@ public class Nodo<E extends Comparable<E>> implements Comparable<Nodo<E>>{
 		return valor.compareTo(o.valor);
 	}
 	
+	/**
+	 * Describe el camino recorrido para hallar un objeto.
+	 * @param objeto El objeto que se desea rastrear.
+	 * @param prev Cadena utilizada para la recursividad.
+	 * @return Una cadena que representa el camino. Los 1's indican que se recorrió a la derecha y los 0's que se recorrió a la izquierda.
+	 */
 	public String tracePathTo( E objeto, String prev ){
 		if( valor.compareTo( objeto ) == 0 ) return prev;
 		else if( valor.compareTo( objeto ) < 0 ){
@@ -229,10 +235,18 @@ public class Nodo<E extends Comparable<E>> implements Comparable<Nodo<E>>{
 		}
 	}
 
+	/**
+	 * Coloca el objeto indicado como hijo izquierdo de este nodo.
+	 * @param n El objeto a colocar.
+	 */
 	public void setLeft( Nodo<E> n ){
 		hijoIzq = n;
 	}
 	
+	/**
+	 * Coloca el objeto indicado como hijo derecho de este nodo.
+	 * @param n El objeto a colocar.
+	 */
 	public void setRight( Nodo<E> n ){
 		hijoDer = n;
 	}

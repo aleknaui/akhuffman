@@ -16,18 +16,23 @@ public class GeneradorHuffman {
 	// Atributos
 	// --------------------------------------------------------------------------------
 	
+	/** La cadena que se quiere codificar */
 	private String cadena;
-	
+	/** La lista de los diferentes caracteres a codificar */
 	private ListaOrdenada<ArbolBinario<Simbolo>> lista;
-	
+	/** El arbol del cual se obtiene la codificacion */
 	private ArbolBinario<Simbolo> arbol;
-	
+	/** Lugar de almacenaje de los códigos generados */
 	private HashMap<String, String> codigos;
 	
 	// --------------------------------------------------------------------------------
 	// Constructor
 	// --------------------------------------------------------------------------------
 	
+	/**
+	 * Crea el generador y obtiene los códigos de una palabra.
+	 * @param string La cadena que se desea codificar.
+	 */
 	public GeneradorHuffman( String string ){
 		cadena = string;
 		lista = new ListaOrdenada<ArbolBinario<Simbolo>>();
@@ -44,6 +49,9 @@ public class GeneradorHuffman {
 	// Métodos
 	// --------------------------------------------------------------------------------
 	
+	/**
+	 * Obtiene las diferentes frecuencias de cada caracter y genera la lista ordenada.
+	 */
 	private void obtenerFrecuencias(){
 		String cadenaInicial = cadena;
 		while( ! cadena.isEmpty() ){
@@ -56,6 +64,9 @@ public class GeneradorHuffman {
 		}*/
 	}
 	
+	/**
+	 * Genera el arbol del cual se obtendrán los códigos.
+	 */
 	private void generarArbol(){
 		while( lista.size() > 1 ){
 			
@@ -86,6 +97,9 @@ public class GeneradorHuffman {
 		arbol.darPrimero().darValor().cambiarModoComparacion('s');
 	}
 	
+	/**
+	 * Obtiene los diferentes códigos en base al árbol construído.
+	 */
 	private void obtenerCodigos(){
 		obtenerFrecuencias();
 		for( ArbolBinario<Simbolo> a : lista ){
@@ -97,6 +111,9 @@ public class GeneradorHuffman {
 		
 	}
 	
+	/**
+	 * Imprime los resultados de la codificación.
+	 */
 	private void darResultados(){
 		System.out.println( "\nCódigo de Huffman para la palabra \"" + cadena + "\":" );
 		String cadenaInicial = cadena;
@@ -114,6 +131,10 @@ public class GeneradorHuffman {
 		System.out.println( "En codificación estándar, el largo de la cadena sería: " + (int)((Math.log( codigos.values().size() ) / Math.log(2)) * cadena.length()) );
 	}
 	
+	/**
+	 * Método principal del programa.
+	 * @param args No son necesarios.
+	 */
 	public static void main( String[] args ){
 		Scanner scanner = new Scanner( System.in );
 		System.out.print( "Ingrese una palabra para codificar: " );
