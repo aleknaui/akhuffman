@@ -14,7 +14,7 @@ public class Simbolo implements Comparable<Simbolo>{
 	// --------------------------------------------------------------------------------
 	
 	/** Caracter contenido por el objeto. */
-	private char simbolo;
+	private String simbolo;
 	/** Cantidad de veces que el caracter se encuentra en una cadena. */
 	private int frecuencia;
 	/** Representación de Huffman del caracter. */
@@ -32,7 +32,7 @@ public class Simbolo implements Comparable<Simbolo>{
 	 * @param cadena La cadena en la que se contará el caracter
 	 * post: El símbolo ha sido creado. La frecuencia es la cantidad de veces que el símbolo se encuentra en la cadena ingresada.
 	 */
-	public Simbolo( char simb, String cadena ){
+	public Simbolo( String simb, String cadena ){
 		modoComparacion = COMP_POR_FRECUENCIA;
 		simbolo = simb;
 		frecuencia = contarOcurrencias( cadena, simbolo );
@@ -44,9 +44,9 @@ public class Simbolo implements Comparable<Simbolo>{
 	 * frecuencias inferiores.
 	 * @param suma La suma de las frecuencias inferiores.
 	 */
-	public Simbolo( int suma ){
+	public Simbolo( String simb, int suma ){
 		modoComparacion = COMP_POR_FRECUENCIA;
-		simbolo = '*';
+		simbolo = simb;
 		frecuencia = suma;
 		representacion = false;
 	}
@@ -59,8 +59,14 @@ public class Simbolo implements Comparable<Simbolo>{
 	public int compareTo(Simbolo o) {
 		if( modoComparacion == COMP_POR_FRECUENCIA )
 			return frecuencia - o.frecuencia;
-		else
-			return (int)simbolo - (int)o.simbolo;
+		else{
+			if( simbolo.equals( o.simbolo ) ) return 0;
+			String left = simbolo.substring(0, simbolo.indexOf("¬¬"));
+			if( left.contains( o.simbolo ) ) return 1;
+			return -1;
+			/*String right = simbolo.substring(simbolo.indexOf('$') + 1);
+			if( right.contains( o.simbolo ) ) return -1;*/
+		}
 	}
 	
 	@Override
@@ -77,7 +83,7 @@ public class Simbolo implements Comparable<Simbolo>{
 	 * Retorna el caracter contenido.
 	 * @return El caracter representado por el objeto.
 	 */
-	public char darSimbolo(){
+	public String darSimbolo(){
 		return simbolo;
 	}
 	
@@ -125,11 +131,13 @@ public class Simbolo implements Comparable<Simbolo>{
 	 * @param c El caracter a contar
 	 * @return La cantidad de veces que c está en s.
 	 */
-	private static int contarOcurrencias( String s, char c )
+	private static int contarOcurrencias( String s, String c )
 	{
 		int contador = 0;
-		for( int i = 0; i < s.length(); i++ ){
-			if( s.charAt(i) == c ) contador++;}
+		while( s.contains(c) ){
+			contador++;
+			s = s.replaceFirst(c, "");
+		}
 		return contador;
 	}
 	

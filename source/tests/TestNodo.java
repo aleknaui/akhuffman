@@ -1,5 +1,7 @@
 package tests;
 
+import java.util.ArrayList;
+
 import estructuras.Nodo;
 import junit.framework.TestCase;
 
@@ -31,6 +33,20 @@ public class TestNodo extends TestCase {
 		assertEquals("cosa",nodo.darHijoDerecho().darValor());
 		nodo.setHijo("carro");
 		assertEquals("carro",nodo.darHijoIzquierdo().darHijoIzquierdo().darValor());
+	}
+	
+	public final void testTracePathTo(){
+		nodo = new Nodo<String>("f");
+		String[] elementos = {"d","h","e","g","l","b","c","z"};
+		for( String s : elementos ) nodo.setHijo( s );
+		assertEquals( "0", nodo.tracePathTo("d", "") );
+		assertEquals( "1", nodo.tracePathTo("h", "") );
+		assertEquals( "01", nodo.tracePathTo("e", "") );
+		assertEquals( "10", nodo.tracePathTo("g", "") );
+		assertEquals( "11", nodo.tracePathTo("l", "") );
+		assertEquals( "00", nodo.tracePathTo("b", "") );
+		assertEquals( "001", nodo.tracePathTo("c", "") );
+		assertEquals( "111", nodo.tracePathTo("z", "") );
 	}
 	
 	@Override

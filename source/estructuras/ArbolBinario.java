@@ -118,5 +118,16 @@ public class ArbolBinario<E extends Comparable<E>> implements Comparable<ArbolBi
 	public int compareTo(ArbolBinario<E> o) {
 		return primero.compareTo( o.primero );
 	}
-
+	
+	public String tracePathTo( E objeto ){
+		return primero.tracePathTo( objeto , "" );
+	}
+	
+	public void setLeft( ArbolBinario<E> a ){
+		primero.setLeft( a.darPrimero() );
+	}
+	
+	public void setRight( ArbolBinario<E> a ){
+		primero.setRight( a.darPrimero() );
+	}
 }
