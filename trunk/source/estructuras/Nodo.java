@@ -210,5 +210,30 @@ public class Nodo<E extends Comparable<E>> implements Comparable<Nodo<E>>{
 	public int compareTo(Nodo<E> o) {
 		return valor.compareTo(o.valor);
 	}
+	
+	public String tracePathTo( E objeto, String prev ){
+		if( valor.compareTo( objeto ) == 0 ) return prev;
+		else if( valor.compareTo( objeto ) < 0 ){
+			if ( ! tieneHijoDer() ) return "";
+			else{
+				prev = prev + "1";
+				return hijoDer.tracePathTo( objeto, prev );
+			}
+		}
+		else{
+			if ( ! tieneHijoIzq() ) return "";
+			else{
+				prev = prev + "0";
+				return hijoIzq.tracePathTo( objeto, prev );
+			}
+		}
+	}
 
+	public void setLeft( Nodo<E> n ){
+		hijoIzq = n;
+	}
+	
+	public void setRight( Nodo<E> n ){
+		hijoDer = n;
+	}
 }
