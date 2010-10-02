@@ -80,8 +80,8 @@ public class GeneradorHuffman {
 			
 			// Los combina en otro arbol. Lo agrega a la lista para que se ordene.
 			ArbolBinario<Simbolo> mezcla = new ArbolBinario<Simbolo>( new Simbolo( comodin, suma ) );
-			a1.darPrimero().darValor().marcarIzquierda(); a1.darPrimero().darValor().cambiarModoComparacion('s');
-			a2.darPrimero().darValor().marcarDerecha(); a2.darPrimero().darValor().cambiarModoComparacion('s');
+			a1.darPrimero().darValor().cambiarModoComparacion('s');
+			a2.darPrimero().darValor().cambiarModoComparacion('s');
 			mezcla.setLeft( a1 ); mezcla.setRight( a2 );
 			lista.add( mezcla );
 			
