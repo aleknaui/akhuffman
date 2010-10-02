@@ -119,14 +119,27 @@ public class ArbolBinario<E extends Comparable<E>> implements Comparable<ArbolBi
 		return primero.compareTo( o.primero );
 	}
 	
+	/**
+	 * Describe el camino recorrido para hallar un objeto.
+	 * @param objeto El objeto que se desea rastrear.
+	 * @return Una cadena que representa el camino. Los 1's indican que se recorrió a la derecha y los 0's que se recorrió a la izquierda.
+	 */
 	public String tracePathTo( E objeto ){
 		return primero.tracePathTo( objeto , "" );
 	}
 	
+	/**
+	 * Coloca el arbol indicado a la izquierda del primer nodo.
+	 * @param a El arbol a colocar.
+	 */
 	public void setLeft( ArbolBinario<E> a ){
 		primero.setLeft( a.darPrimero() );
 	}
 	
+	/**
+	 * Coloca el arbol indicado a la derecha del primer nodo.
+	 * @param a El arbol a colocar.
+	 */
 	public void setRight( ArbolBinario<E> a ){
 		primero.setRight( a.darPrimero() );
 	}
