@@ -17,8 +17,6 @@ public class Simbolo implements Comparable<Simbolo>{
 	private String simbolo;
 	/** Cantidad de veces que el caracter se encuentra en una cadena. */
 	private int frecuencia;
-	/** Representación de Huffman del caracter. */
-	private boolean representacion;
 	/** Modo de comparación */
 	private char modoComparacion;
 	
@@ -36,7 +34,6 @@ public class Simbolo implements Comparable<Simbolo>{
 		modoComparacion = COMP_POR_FRECUENCIA;
 		simbolo = simb;
 		frecuencia = contarOcurrencias( cadena, simbolo );
-		representacion = false;
 	}
 	
 	/**
@@ -48,7 +45,6 @@ public class Simbolo implements Comparable<Simbolo>{
 		modoComparacion = COMP_POR_FRECUENCIA;
 		simbolo = simb;
 		frecuencia = suma;
-		representacion = false;
 	}
 	
 	// --------------------------------------------------------------------------------
@@ -93,27 +89,6 @@ public class Simbolo implements Comparable<Simbolo>{
 	 */
 	public int darFrecuencia(){
 		return frecuencia;
-	}
-	
-	/**
-	 * Marca que el Símbolo se agregó como nodo hijo derecho de un arbol.
-	 */
-	public void marcarDerecha(){
-		representacion = true;
-	}
-	
-	/**
-	 * Marca que el Símbolo se agregó como nodo hijo izquierdo de un arbol.
-	 */
-	public void marcarIzquierda(){
-		representacion = false;
-	}
-	
-	/**
-	 * Retorna la representación del código de Huffman como un 1 o 0.
-	 */
-	public String darRepresentacion(){
-		return representacion ? "1" : "0";
 	}
 	
 	/**
