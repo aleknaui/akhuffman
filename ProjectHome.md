@@ -1,0 +1,3 @@
+El programa construye un árbol de Huffman dado un mensaje de entrada, conformado por una cadena de caracteres, muestra los códigos que le corresponden a cada caracter y la frecuencia de ese caracter en el mensaje.
+
+El proyecto se puede descargar desde la página "Downloads" o con Subversion. El video de demostración se encuentra en YouTube: http://www.youtube.com/watch?v=R-eM43kHAX0 y en "Downloads".
